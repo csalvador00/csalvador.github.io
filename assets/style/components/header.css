@@ -1,0 +1,73 @@
+#header {
+  display: flex;
+  position: fixed;
+  align-items: flex-flex-end;
+  padding: .3em 3em;
+  /* border: 2px solid #4169E1; */
+  background: #4169E1;
+  z-index: 9999;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  max-height: 50px;
+}
+
+#header .layout_themes {
+  display: flex;
+  position: relative;
+  max-width: 400px;
+  margin-left: 100px;
+}
+
+#header .layout_themes .btn-theme {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0 .3em;
+}
+
+#header .layout_themes .btn-theme:hover {
+  background: rgba(0,0,0,.3);
+}
+
+#header .layout_themes .icon_theme {
+  margin: 0 10px;
+}
+
+#header .layout_themes .vertical_line {
+  background: #fff;
+  border: 1px solid #fff;
+  max-width: 1px;
+  height: 40px;
+}
+#header .nav_container {
+  position: absolute;
+  margin-top: 55px;
+  border: 1px solid rgba(0,0,0,.3);
+  left: 0;
+  margin-left: 35% ;
+  background: #edf0f2;
+  border-radius: 5px;
+}
+
+#header nav {
+  display: inline-flex;
+  /* width: 170px; */
+  padding: .3em;
+  /* border: 1px solid #4169E1; */
+  right: 0;
+  justify-content: center;
+}
+
+#header nav li{
+  padding: .3em;
+  color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  
+}
+
+#header nav li:hover{
+  transition: .7s;
+  background: rgba(0,0,0,.1);
+}

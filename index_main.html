@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>🦜 Polyglot - Piratical PyScript</title>
+    <link rel="stylesheet" href="assets/style/canvas.css">
+    <link rel="stylesheet" href="assets/style/components/header.css">
+    <link rel="stylesheet" href="assets/style/components/toolbar.css">
+    <link rel="stylesheet" href="assets/style/components/custom_canvas.css">
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.10.2/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.10.2/core.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+			.label {
+				color: #FFF;
+				font-family: sans-serif;
+				padding: 2px;
+				background: rgba( 0, 0, 0, .6 );
+			}
+		</style>
+  </head>
+  <body>
+    <!-- <header id="header">
+        <img src="./assets/images/Logos/easy_parking_v1.png" width="40" />
+
+        <div class="layout_themes">
+          <button class="btn-theme">
+            <img class="light_theme icon_theme" src="./assets/images/Logos/light_theme.png" width="20" />
+          </button>
+          <div class="vertical_line"></div>
+          <button class="btn-theme">
+            <img class="dark_theme icon_theme" src="./assets/images/Logos/dark_theme__light.png" width="20" />
+          </button>
+        </div>
+        <div class="nav_container">
+          <nav class="nav">
+            <ul>
+              <li><i style="font-size: 15px; color: #919090;" class="fa fa-eye"></i></li>
+              <li><i style="font-size: 20px; color: #4169E1;" class="fa fa-square"></i></li>
+              <li><i style="font-size: 20px; color: #4169E1;" class="fa fa-cube"></i></li>
+            </ul>
+          </nav>
+  
+          <nav class="nav">
+            <ul>
+              <li><i class="fa fa-edit" style="font-size: 15px; color: #919090;"></i></li>
+              <li><i class="fa fa-rotate" style="font-size:20px; color: #4169E1;"></i></li>
+              <li><i class="fa fa-expand" style="font-size:20px; color: #4169E1;"></i></li>
+              <li><i class="fa fa-object-group" style="font-size:20px; color: #4169E1;"></i></li>
+              <li><i class="fa fa-copy" style="font-size:20px; color: #4169E1;"></i></li>
+              <li><i class="fa fa-trash" style="font-size:20px; color: #ba3723;"></i></li>
+            </ul>
+          </nav>
+        </div>
+      </header> -->
+    <div id="main">
+      
+      <!-- <div id="custom-canvas"> -->
+        <!-- <div class="toolbar">
+          <div>
+            <ul class="toolbar_list">
+              <li class="toolbar_list--item" data-type="zone" data-src="./assets/images/Logos/toolbar/toolbar_setor_icon.png">
+                <div class="toolbar_list--item__card">
+                  <img width="40" src="./assets/images/Logos/toolbar/toolbar_setor_icon.png"/>
+                  <div class="btn_front"></div>
+                </div>
+              </li>
+              <li class="toolbar_list--item" data-type="park" data-src="./assets/images/Logos/toolbar/toolbar_parking_icon.png">
+                <div class="toolbar_list--item__card">
+                  <img width="40" src="./assets/images/Logos/toolbar/toolbar_parking_icon.png"/>
+                  <div class="btn_front"></div>
+                </div>
+              </li>
+              <li class="toolbar_list--item" data-type="park" data-src="./assets/images/logos/toolbar/toolbar_rotation_zone.png">
+                <div class="toolbar_list--item__card">
+                  <img width="40" src="./assets/images/Logos/toolbar/toolbar_rotation_zone.png"/>
+                  <div class="btn_front"></div>
+                </div>
+              </li>
+              <li class="toolbar_list--item" data-type="park" data-src="./assets/images/Logos/toolbar/toolbar_street_single_direction_icon.png">
+                <div class="toolbar_list--item__card">
+                  <img width="40" src="./assets/images/Logos/toolbar/toolbar_street_single_direction_icon.png"/>
+                  <div class="btn_front"></div>
+                </div>
+              </li>
+              <li class="toolbar_list--item" data-type="park" data-src="./assets/images/Logos/toolbar/toolbar_street_duple_direction_icon.png">
+                <div class="toolbar_list--item__card">
+                  <img width="40" src="./assets/images/Logos/toolbar/toolbar_street_duple_direction_icon.png"/>
+                  <div class="btn_front"></div>
+                </div>
+              </li>
+              <li class="toolbar_list--item" data-type="park" data-src="./assets/images/Logos/toolbar/toolbar_canteiro_icon.png">
+                <div class="toolbar_list--item__card">
+                  <img width="40" src="./assets/images/Logos/toolbar/toolbar_canteiro_icon.png"/>
+                  <div class="btn_front"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+        <div id="drawArea"></div>
+        <!-- <div class="square" data-src="./assets/images/Logos/parking_button.png"></div>
+        <div class="square" data-src="./assets/images/Logos/parking_button.png"></div>
+        <div class="square" data-src="./assets/images/Logos/parking_button.png"></div> -->
+        <!-- <div id="gameInfo">
+          <div id="mouseposition">
+            X: <span id="X"></span>
+            Y: <span id="Y"></span>
+          </div>
+        </div> -->
+      <!-- </div> -->
+    </div>
+    <script type="text/javascript">
+      // window.localStorage.setItem("lastname", "Smith");
+    </script>
+    
+    <!-- <script type="py" src="./main.py"></script> -->
+    <script type="text/javascript" src="dist/bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - materials - car</title>
+		<meta charset="utf-8">
+		<style>
+			body {
+				color: #bbbbbb;
+				background: #333333;
+			}
+			a {
+				color: #08f;
+			}
+			.colorPicker {
+				display: inline-block;
+				margin: 0 10px
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="info">
+			<br><br>
+			<span class="colorPicker"><input id="body-color" type="color" value="#ff0000"></input><br/>Body</span>
+			<span class="colorPicker"><input id="details-color" type="color" value="#ffffff"></input><br/>Details</span>
+			<span class="colorPicker"><input id="glass-color" type="color" value="#ffffff"></input><br/>Glass</span>
+		</div>
+
+		<div id="container"></div>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "../build/three.module.js",
+					"three/addons/": "./jsm/"
+				}
+			}
+		</script>
+
+        <script type="text/javascript" src="./index.js"></script>
+
+	</body>
+</html>

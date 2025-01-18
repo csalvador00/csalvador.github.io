@@ -1,0 +1,83 @@
+#main .toolbar{
+  border: 1px solid #ccc;
+  position: absolute;
+  left: 0;
+  max-width: 45px;
+  margin-top: 80px;
+  margin-left: 25px;
+  padding: .1em .5em;
+  border-radius: 5px;
+  background: #edf0f2;
+}
+
+#main .toolbar .toolbar_list {
+  list-style: none;
+  border: 0px solid #333;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+#main .toolbar .toolbar_list--item {
+  display: flex;
+  /* justify-content: flex-end; */
+  width: 40px;
+  max-width: 60px;
+  margin: 10px 2px;
+  border: 0px solid #333;
+  cursor: pointer;
+  max-height: 100px;
+}
+
+#main .toolbar .toolbar_list--item img {
+  border-radius: 5px;
+  /* border: 1px solid rgba(0,0,0, .4); */
+  /* box-shadow: 0px 0px 5px rgba(0,0,0, .5); */
+}
+
+#main .toolbar .toolbar_list--item .toolbar_list--item__card {
+  display: flex;
+  justify-content: center;
+  border: 0px solid blue;
+  /* background: red; */
+  padding: 0;
+}
+
+#main .toolbar .toolbar_list--item .btn_front {
+  border: 0px solid blue;
+  width: 60px;
+  margin-left: -60px;
+  /* background: blue; */
+}
+
+#main .toolbar .toolbar_list--item .rotate {
+  position: absolute;
+  bottom: 70px;
+  /* left: -15px; */
+  height: 100px;
+  transform: rotate3d(50, 1, 10, 30deg);
+  transform: matrix(1.05, 0, 0, 1.05, 0, 0);
+  margin-left: 0px;
+  /* border: 1px solid red; */
+}
+
+#main .toolbar .toolbar_list--item .rotate:hover {
+  cursor: grabbing;
+}
+
+#main .toolbar .toolbar_list--item .rotate .btn_front {
+  position: absolute;
+  margin-top: 0px;
+  border: 0px solid blue;
+  width: 60px;
+  height: 100px;
+  margin-left: 0px;
+  /* background: blue; */
+}
+
+#main .square {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 1px solid blue;
+}
