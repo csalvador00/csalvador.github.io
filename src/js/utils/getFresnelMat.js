@@ -16,7 +16,7 @@ function getFresnelMat({rimHex = 0xe3d10e, facingHex = 0x000000} = {}) {
   varying float vReflectionFactor;
   
   void main() {
-    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+    vec4 mvPosition = modelViewMatrix * vec4( position.x, position.y, position.z, 1.0 );
     vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
   
     vec3 worldNormal = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
@@ -47,6 +47,7 @@ function getFresnelMat({rimHex = 0xe3d10e, facingHex = 0x000000} = {}) {
     blending: THREE.AdditiveBlending,
     // wireframe: true,
   });
+
   return fresnelMat;
 }
 export { getFresnelMat };

@@ -20,6 +20,26 @@ export const sun = {
         }
     }
 }
+
+export const harleyCommeet = {
+    name: "Harley Commeet",
+    params: { 
+        label: "sun",
+        texture: "../../../assets/images/textures/astros/comet_v4.png",
+        config: {
+            planetSize: 1.5,
+            atmosphereColor: 0x1488db,
+            position: {x: 8, y: 10, z: 3},
+            velocity: .0001,
+            rotationAxis: {
+                radianX: 32,
+                radianY: 50,
+                radianZ: 17.5,
+            }
+        }
+    }
+}
+
 const rand = Math.floor(Math.random() * 2 + 1);
 
 const randomSinal = Math.floor(Math.random() * (-1 - 1) + 1) == 0 ? 1 : -1; 
@@ -120,9 +140,9 @@ export const planets = [
                 position: {x: 11, y: 1, z: 11},
                 velocity: .000035,
                 rotationAxis: {
-                    radianX: 52,
+                    radianX: 60,
                     radianY: 8,
-                    radianZ: 52,
+                    radianZ: 60,
                 }
             }
         }
@@ -141,9 +161,9 @@ export const planets = [
                 position: {x: 15, y: 1, z: 15},
                 velocity: .00002,
                 rotationAxis: {
-                    radianX: 64,
+                    radianX: 74,
                     radianY: 7,
-                    radianZ: 64,
+                    radianZ: 74,
                 }
             }
         }
@@ -161,9 +181,9 @@ export const planets = [
                 position: {x: 17, y: 1, z: 17},
                 velocity: .0000015,
                 rotationAxis: {
-                    radianX: 80,
+                    radianX: 90,
                     radianY: 14,
-                    radianZ: 80,
+                    radianZ: 90,
                 }
             }
         }
@@ -181,9 +201,9 @@ export const planets = [
                 position: {x: 20, y: 1, z: 20},
                 velocity: .000012,
                 rotationAxis: {
-                    radianX: 100,
+                    radianX: 110,
                     radianY: 0,
-                    radianZ: 100,
+                    radianZ: 130,
                 }
             }
         }

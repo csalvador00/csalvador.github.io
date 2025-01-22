@@ -2,19 +2,16 @@
 import * as THREE from 'three';
 import THREEx3 from "three-x3"
 import * as fs from 'fs-web';
-import { VertexNormalsHelper } from 'three/addons/helpers/VertexNormalsHelper.js';
-import { VertexTangentsHelper } from 'three/addons/helpers/VertexTangentsHelper.js';
 
-import { OrbitControls, DragControls } from 'three/examples/jsm/Addons.js';
+const path = require("path");
+
 // COMPONETS E CONFIGS IMPORTS
 import CustomGeometry from './components/geometries.js';
 //CUSTOM UTILS IMPORTS
 import timeStampID from './utils/timestamp_id.js';
-import { sun, planets, moons } from './components/Geometries/planets.list.js';
+import { sun, harleyCommeet, planets, moons } from './components/Geometries/planets.list.js';
 
-import { STORAGEKEY } from '../js/utils/enums.config.js';
 import SCENE3D from './initScene.js';
-import { texture } from 'three/tsl';
 
 const clock = new THREE.Clock();
 
@@ -46,10 +43,8 @@ class App {
         this.initGridHelper();
 
         this.newObject("sun", false, sun.params);
-
+        
         this.renderer.setAnimationLoop( this.render.bind(this) );
-
-        // return;
         
         planets.forEach( planet => {
             let radiansAxis = planet.params.config.rotationAxis,
@@ -76,7 +71,7 @@ class App {
         });
 
         const vertices = [];
-        const star = new THREE.TextureLoader().load("../../assets/images/textures/astros/star_v1.png");
+        const star = new THREE.TextureLoader().load("../../../assets/images/textures/astros/star_v1.png");
         // star.colorSpace = new THREE.SRGBColorSpace;
         const r = 30;
 
@@ -101,19 +96,31 @@ class App {
             transparent: true,
             blending: THREE.AdditiveBlending
         } );
+        
         const points = new THREE.Points( geometry, material );
         this.scene.add( points );
 
         this.asteroidBelt();
         this.pouderBelt();
+
+        this.$commeet = this.newObject("commeet", false, harleyCommeet.params);
+
+        let radiansAxis = harleyCommeet.params.config.rotationAxis,
+            radianX     = radiansAxis.radianX,
+            radianY     = radiansAxis.radianY,
+            radianZ     = radiansAxis.radianZ;
+
+        let velocity    = harleyCommeet.params.config.velocity;
+
+        this.setPlanetOrbitLine( 0, radianX, radianY, radianZ, velocity, true);
         
     }
 
     pouderBelt() {
         const vertices = [];
-        const star = new THREE.TextureLoader().load("../../assets/images/textures/astros/asteroid_v2.png");
+        const star = new THREE.TextureLoader().load("../../../assets/images/textures/astros/asteroid_v2.png");
         const divisor = 20000;
-        const r = 100;
+        const r = 120;
 
         for(var i = 0; i <= divisor; i++) {
             const v = ( i / divisor ) * ( Math.PI * 2 );
@@ -151,9 +158,9 @@ class App {
 
     asteroidBelt() {
         const vertices = [];
-        const star = new THREE.TextureLoader().load("../../assets/images/textures/astros/asteroid_v2.png");
+        const star = new THREE.TextureLoader().load("../../../assets/images/textures/astros/asteroid_v2.png");
         const divisor = 900;
-        const r = 100;
+        const r = 120;
 
         for(var i = 0; i <= divisor; i++) {
             const v = ( i / divisor ) * ( Math.PI * 2 );
@@ -180,6 +187,8 @@ class App {
         })
 
         const asteroids = new THREE.Points( geometry, material );
+        asteroids.castShadow = true;
+        asteroids.receiveShadow = true; //default
 
         this.scene.add(asteroids)
         this.$asteroidBelt = asteroids;
@@ -262,19 +271,26 @@ class App {
 
     }
 
-    setPlanetOrbitLine( index, radianX, radianY, radianZ, velocity) {
+    setPlanetOrbitLine( index, radianX, radianY, radianZ, velocity, inclined = false) {
 
         const vertices = [];
         const divisions = 150;
+        let v;
 
         for ( let i = 0; i <= divisions; i ++ ) {
 
-            const v = ( i / divisions ) * ( Math.PI * 2 );
+            v = ( i / divisions ) * ( Math.PI * 2 );
 
             const x = ( Math.sin( v ) * radianX * 3 ) ;
             const z = ( Math.cos( v ) * radianZ * 3 );
 
-            vertices.push( x, 0, z );
+            let y = 0;
+
+            if ( inclined ) {
+                y = Math.sin( v ) * radianY;
+            }
+
+            vertices.push( x, y, z );
 
         }
 
@@ -284,7 +300,7 @@ class App {
         const material = new THREE.LineBasicMaterial( {
             color: Math.random() * 0xffffff,
             transparent: true,
-            opacity: .8
+            opacity: .3
         } );
 
         const time = Date.now() * radianY;
@@ -293,11 +309,22 @@ class App {
         // line.scale.setScalar( i / 3 );
         line.userData.velocity = velocity;
         line.position.y = 1;
-        // line.rotation.x = radianY * Math.PI * ( vertices.length / 2 );
-        // line.rotation.z = radianZ;
-        // this.items[index].add( line );
+
+        if ( inclined ) {
+            line.add( this.$commeet);
+
+            this.$commeetVertex = {
+                vertex: vertices
+            }
+
+            const commeetPosition = this.$commeetVertex.vertex.slice( 0, 3 );
+
+            this.$commeet
+            .position.set(commeetPosition[0], commeetPosition[1], commeetPosition[2]);
+        }
+
         this.scene.add( line );
-        this.orbitLines.push( line )
+        this.orbitLines.push( line );
 
     }
 
@@ -369,7 +396,7 @@ class App {
             this.items.push(objGeometry.$mesh);
         }
 
-        if( type === "moon" ) {
+        if( type == "moon" || type == "commeet" ) {
             return objGeometry.$mesh;
         } else if ( type == "sun"){
             this.$sun = objGeometry.$mesh;
@@ -402,25 +429,31 @@ class App {
 
             $i.position.set( finalRadianX, 1, finalRadianZ );
             $i.rotation.y += .01;
-            // $i.rotation.z += .01;
-
-            // if( count % 2 == 0 && count < 10 )
-            //     this.setPlanetOrbitLineDinamicly( finalRadianX, positionY, finalRadianZ, time);
-
-            // count += 1;
 
         } );
 
-        this.orbitLines.forEach( $line => {
+        // return;
 
-            const time = Date.now() * $line.userData.velocity;
-			//const positionY = Math.cos( time ) * 2 + 1.25;
+        const $commeet = this.$commeet;
 
-            //$line.position.set( Math.sin( time ) * 3, 0, Math.cos( time ) * 3 );
-            //$line.rotation.y += .01 ;
-            // $line.rotation.z += .01;
+        const radiansAxis = harleyCommeet.params.config.rotationAxis,
+            radianX     = radiansAxis.radianX,
+            radianY     = radiansAxis.radianY,
+            radianZ     = radiansAxis.radianZ;
 
-        } );
+        let velocity    = harleyCommeet.params.config.velocity;
+
+        const utime = Date.now() * velocity;
+        const positionY = (Math.cos( utime ) * radianY) ;
+
+        $commeet.position.set(
+            Math.sin( radianY + utime ) * radianX * 3,
+            Math.sin( radianY + utime ) * radianX * 1.57 ,
+            Math.cos( radianY + utime ) * radianZ * 3
+        );
+
+        // $commeet.rotation.y = Math.sin(utime);
+
     }
 
     moonsOrbitAnimation() {
@@ -448,16 +481,6 @@ class App {
 
         } );
 
-        this.orbitLines.forEach( $line => {
-
-            const time = Date.now() * $line.userData.velocity;
-			//const positionY = Math.cos( time ) * 2 + 1.25;
-
-            //$line.position.set( Math.sin( time ) * 3, 0, Math.cos( time ) * 3 );
-            //$line.rotation.y += .01 ;
-            // $line.rotation.z += .01;
-
-        } );
     }
 
     setPlanetOrbitLineDinamicly( radianX, radianY, radianZ, velocity) {
@@ -487,13 +510,8 @@ class App {
         } );
 
         const line = new THREE.Line( geometry, material );
-        // // line.scale.setScalar( i / 3 );
-        // line.userData.velocity = velocity;
-        // line.position.y = 1;
-        // line.rotation.z = Math.cos( radianZ * 3 );
-        // line.rotation.x = Math.sin( radianX );
+
         this.scene.add( line );
-        // this.orbitLines.push( line )
 
     }
 
@@ -518,7 +536,7 @@ class App {
         this.sunColorShaderControl();
 
         this.planetsOrbitAnimation();
-        this.moonsOrbitAnimation()
+        this.moonsOrbitAnimation();
 
         this.$asteroidBelt.rotation.y += .0009;
         this.$pouderBelt.rotation.y += .0003
